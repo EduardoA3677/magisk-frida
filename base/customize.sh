@@ -135,7 +135,7 @@ PATH=$PATH:/data/adb/ap/bin:/data/adb/magisk:/data/adb/ksu/bin
 print_modname() {
   ui_print " "
   ui_print "    ********************************************"
-  ui_print "    *          Magisk/KernelSU/APatch          *"
+  ui_print "    *      Magisk/KernelSU/KSU Next/APatch     *"
   ui_print "    *                  Frida                   *"
   ui_print "    ********************************************"
   ui_print " "
@@ -155,8 +155,30 @@ on_install() {
   ui_print "- Detected architecture: $F_ARCH"
 
   if [ "$BOOTMODE" ] && [ "$KSU" ]; then
-      ui_print "- Installing from KernelSU"
-      ui_print "- KernelSU version: $KSU_KERNEL_VER_CODE (kernel) + $KSU_VER_CODE (ksud)"
+      # Detect KernelSU type (regular or Next)
+      if [ -d "/data/adb/ksu" ] && [ -f "/data/adb/ksu/bin/busybox" ]; then
+          KSU_TYPE="KernelSU/KernelSU Next"
+      else
+          KSU_TYPE="KernelSU"
+      fi
+      
+      ui_print "- Installing from $KSU_TYPE"
+      
+      # Display version info if available
+      if [ -n "$KSU_KERNEL_VER_CODE" ] && [ -n "$KSU_VER_CODE" ]; then
+          ui_print "- Version: $KSU_KERNEL_VER_CODE (kernel) + $KSU_VER_CODE (ksud)"
+      elif [ -f "/data/adb/ksu/version" ]; then
+          KSU_VERSION=$(cat /data/adb/ksu/version 2>/dev/null)
+          if [ -n "$KSU_VERSION" ]; then
+              ui_print "- Version: $KSU_VERSION"
+          else
+              ui_print "- Version: Unable to read version file"
+          fi
+      else
+          ui_print "- Version: Environment detected (compatible with all versions)"
+      fi
+      
+      ui_print "- Module compatible with all KernelSU versions"
   elif [ "$BOOTMODE" ] && [ "$APATCH" ]; then
       ui_print "- Installing from APatch"
       ui_print "- APatch version: $APATCH_VER_CODE. Magisk version: $MAGISK_VER_CODE"
