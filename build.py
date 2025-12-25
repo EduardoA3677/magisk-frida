@@ -66,7 +66,7 @@ name=MagiskFrida
 version={project_tag}
 versionCode={generate_version_code(project_tag)}
 author=ViRb3 & enovella
-updateJson=https://github.com/ViRb3/magisk-frida/releases/latest/download/updater.json
+updateJson=https://github.com/EduardoA3677/magisk-frida/releases/latest/download/updater.json
 description=Run frida-server on boot"""
 
     with open(path.joinpath("module.prop"), "w", newline="\n") as f:
@@ -105,8 +105,8 @@ def create_updater_json(project_tag: str):
     updater = {
         "version": project_tag,
         "versionCode": generate_version_code(project_tag),
-        "zipUrl": f"https://github.com/ViRb3/magisk-frida/releases/download/{project_tag}/MagiskFrida-{project_tag}.zip",
-        "changelog": "https://raw.githubusercontent.com/ViRb3/magisk-frida/master/CHANGELOG.md",
+        "zipUrl": f"https://github.com/EduardoA3677/magisk-frida/releases/download/{project_tag}/MagiskFrida-{project_tag}.zip",
+        "changelog": "https://raw.githubusercontent.com/EduardoA3677/magisk-frida/master/CHANGELOG.md",
     }
 
     with open(PATH_BUILD.joinpath("updater.json"), "w", newline="\n") as f:

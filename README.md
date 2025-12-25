@@ -10,7 +10,7 @@
 
 ## Supported root solutions
 
-[Magisk](https://github.com/topjohnwu/Magisk), [KernelSU](https://github.com/tiann/KernelSU) and [APatch](https://github.com/bmax121/APatch)
+[Magisk](https://github.com/topjohnwu/Magisk), [KernelSU](https://github.com/tiann/KernelSU), [KernelSU Next](https://kernelsu-next.github.io/) and [APatch](https://github.com/bmax121/APatch)
 
 ## Supported architectures
 
