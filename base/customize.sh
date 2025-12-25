@@ -168,10 +168,14 @@ on_install() {
       if [ -n "$KSU_KERNEL_VER_CODE" ] && [ -n "$KSU_VER_CODE" ]; then
           ui_print "- Version: $KSU_KERNEL_VER_CODE (kernel) + $KSU_VER_CODE (ksud)"
       elif [ -f "/data/adb/ksu/version" ]; then
-          KSU_VERSION=$(cat /data/adb/ksu/version 2>/dev/null || echo "unknown")
-          ui_print "- Version: $KSU_VERSION"
+          KSU_VERSION=$(cat /data/adb/ksu/version 2>/dev/null)
+          if [ -n "$KSU_VERSION" ]; then
+              ui_print "- Version: $KSU_VERSION"
+          else
+              ui_print "- Version: Unable to read version file"
+          fi
       else
-          ui_print "- Version: detected (compatible with all versions)"
+          ui_print "- Version: Environment detected (compatible with all versions)"
       fi
       
       ui_print "- Module compatible with all KernelSU versions"
